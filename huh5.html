@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Test Page</title>
+		<script type="text/javascript">
+			function zoom() {
+				console.log("Request zoom");
+				document.body.style.zoom = "30%" 
+			}
+		</script>
+	</head>
+	<body onload="zoom()">
+		<script>
+			var nw;
+			console.log("Request zoom");
+			document.body.style.zoom = "30%" 
+			// Try to resize the window to 30%.  Doesn't actualy work...
+			console.log("Resize window");
+			console.log("Width ",screen.width,"; height ", screen.height);
+			self.resizeTo(window.screen.availWidth/2, window.screen.availHeight/2);
+			console.log("Width ",screen.width,"; height ", screen.height);
+			console.log("Location ",window.location.href);
+			// window.location.assign("https://google.com");
+			console.log("Screen left ",self.screenLeft, ", top ", self.screenTop, ", X ", self.screenX, ", Y ", self.screenY);
+			self.moveBy(250,250);
+			console.log("Screen left ",window.screenLeft, ", top ", window.screenTop, ", X ", window.screenX, ", Y ", window.screenY);
+			console.log("Top ",window.top,", self ",window.self, ", parent ",window.parent);
+			self.blur();
+			if (window.top == window.self) {
+				// nw = window.open(self.location.href);
+				console.log("Am top");
+			}
+			if (window.self == window.parent) {
+				console.log("Am parent");
+				// nw = window.open(self.location.href);
+			}
+			function openNewWindow() {
+				if (nw == null) nw = window.open(self.location.href);
+			}
+			function closeNewWindow() {
+				if (nw != null) { nw.close(); nw = null; }
+			}
+		</script>
+		<button onclick="openNewWindow()">Open</button><button onclick="closeNewWindow()">Close</button>
+		<style>
+			.hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+		</style>
+		<iframe name="hiddenFrame" class="hide"></iframe>
+		<table>
+			<tr>
+				<td>
+					<iframe name="camera1" src="http://boris.fios.spottydogs.org:8081" height=496 width=656>
+						Browser does not support iframes.
+					</iframe>
+					<br>
+					<center>
+						<table>
+							<tr>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/decoder_control.cgi?command=0&onestep=1&user=admin&pwd=Camera1Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Up">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/decoder_control.cgi?command=2&onestep=1&user=admin&pwd=Camera1Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Down">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/decoder_control.cgi?command=6&onestep=1&user=admin&pwd=Camera1Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Left">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/decoder_control.cgi?command=4&onestep=1&user=admin&pwd=Camera1Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Right">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/decoder_control.cgi?command=4&onestep=1&user=admin&pwd=Camera1Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Reboot">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera1.fios.spottydogs.org/index.htm?user=admin&pwd=Camera1Word" method="get" target="_blank">
+										<input type="submit", value="Launch">
+									</form>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+				<td>
+					<iframe name="camera2" src="http://boris.fios.spottydogs.org:8082" height=496 width=656>
+						Browser does not support iframes.
+					</iframe>
+					<br>
+					<center>
+						<table>
+							<tr>
+								<td>
+									<form action="http://camera2.fios.spottydogs.org/decoder_control.cgi?command=0&onestep=1&user=admin&pwd=Camera2Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Up">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera2.fios.spottydogs.org/decoder_control.cgi?command=2&onestep=1&user=admin&pwd=Camera2Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Down">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera2.fios.spottydogs.org/decoder_control.cgi?command=6&onestep=1&user=admin&pwd=Camera2Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Left">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera2.fios.spottydogs.org/decoder_control.cgi?command=4&onestep=1&user=admin&pwd=Camera2Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Right">
+									</form>
+								</td>
+								<td>
+									<form action="http://camera2.fios.spottydogs.org/reboot.cgi?user=admin&pwd=Camera2Word" method="post" target="hiddenFrame">
+										<input type="submit", value="Reboot">
+									</form>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>
+					<iframe name="camera3" src="http://boris.fios.spottydogs.org:8083" width=1296 height=736>
+						Browser does not support iframes.
+					</iframe>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2><div id="timet" style="text-align: center;">Initial Load</div></td>
+			</tr>
+		</table>
+		<script>
+				// Handle timeouts to refresh the whole thing every so many seconds.  Needed because sometimes the
+				// cameras get messed up.
+			var timerhandle = setInterval( function(){ frameUpdate(); }, 15*60*1000);
+			function frameUpdate() {
+				var fdate = new Date();
+				var ftime = fdate.toLocaleTimeString();
+				function stamp(ft) { return ft + ": "};
+				var ftext = document.getElementById("timet");
+				var cameras = [
+					{cframe:"camera1", curl:"http://boris.fios.spottydogs.org:8081"},
+					{cframe:"camera2", curl:"http://boris.fios.spottydogs.org:8082"},
+					{cframe:"camera3", curl:"http://boris.fios.spottydogs.org:8083"}
+				];
+				console.log(stamp(ftime) + "Frame update requested");
+				ftext.innerHTML = "Reloading...";
+				for (var ii = 0; ii < cameras.length; ++ii) {
+					window.frames[cameras[ii].cframe].location = cameras[ii].curl;
+				}
+				ftext.innerHTML = "Last reload: " + ftime;
+			}
+		</script>
+	</body>
+</html>
